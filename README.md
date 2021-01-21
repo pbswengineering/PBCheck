@@ -3,7 +3,7 @@
 </a>
 
 # PBCheck
-> A tool to check for missing software, directories and executables in the PATH.
+> A tool to check for missing software, directories and executables in the PATH
 
 [![Java](https://img.shields.io/badge/dotnet-blue.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/github/license/bernarpa/pbcheck.svg)](https://opensource.org/licenses/GPL-3.0)
@@ -48,12 +48,13 @@ Create a JSON file with a content similar to the following:
 	"DesiredExeInPath": [
 		"magick.exe",
 		"mvn.cmd",
+		"test.bat",
 		"Flatten-Directory.ps1"
 	]
 }
 ```
 
-PBCheck will ask you to locale the configuration file when executed for the first time.
+PBCheck will ask you to locate a configuration file when executed for the first time.
 
 As for the file content, please bear in mind that:
 
