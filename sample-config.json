@@ -1,0 +1,17 @@
+{
+	"DesiredSoftware": [
+		"Anaconda3",
+		"AutoHotkey",
+		"calibre"
+	],
+	"DesiredDirectories": [
+		"C:\\A\\Directory",
+		"$HOME\\Some\\Other\\Dir"
+	],
+	"DesiredExeInPath": [
+		"magick.exe",
+        "mvn.cmd",
+        "test.bat",
+		"Flatten-Directory.ps1"
+	]
+}
