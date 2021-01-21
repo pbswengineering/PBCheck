@@ -16,7 +16,7 @@ namespace PBCheck
                 var found = false;
                 foreach (var i in installedSW)
                 {
-                    if (i.StartsWith(d))
+                    if (i.ToLower().StartsWith(d.ToLower()))
                     {
                         found = true;
                         break;
