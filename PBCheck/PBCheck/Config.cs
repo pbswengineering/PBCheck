@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PBCheck
 {
@@ -19,6 +15,20 @@ namespace PBCheck
             using StreamReader r = new StreamReader(fileName);
             string json = r.ReadToEnd();
             return JsonConvert.DeserializeObject<Config>(json);
+        }
+
+        public void AddDesiredSoftware(string software)
+        {
+            DesiredSoftware.Add(software);
+            DesiredSoftware.Sort();
+        }
+
+        public void SaveToFile(string fileName)
+        {
+            using StreamWriter w = File.CreateText(fileName);
+            var serializer = new JsonSerializer();
+            serializer.Formatting = Formatting.Indented;
+            serializer.Serialize(w, this);
         }
     }
 }

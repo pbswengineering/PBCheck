@@ -29,20 +29,25 @@ namespace PBCheck
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPBCheck));
             this.tvHints = new System.Windows.Forms.TreeView();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btAddSoftware = new System.Windows.Forms.Button();
+            this.tbSoftwareToAdd = new System.Windows.Forms.TextBox();
             this.lbInstalledSoftware = new System.Windows.Forms.ListBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openConfigurationFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ssStatus = new System.Windows.Forms.StatusStrip();
-            this.tssStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutPBCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ssStatus = new System.Windows.Forms.StatusStrip();
+            this.tssStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbNote = new System.Windows.Forms.Label();
+            this.ttNote = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -87,14 +92,37 @@ namespace PBCheck
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.lbNote);
+            this.tabPage2.Controls.Add(this.btAddSoftware);
+            this.tabPage2.Controls.Add(this.tbSoftwareToAdd);
             this.tabPage2.Controls.Add(this.lbInstalledSoftware);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(765, 324);
+            this.tabPage2.Size = new System.Drawing.Size(765, 351);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Installed Software";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btAddSoftware
+            // 
+            this.btAddSoftware.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAddSoftware.Location = new System.Drawing.Point(683, 307);
+            this.btAddSoftware.Name = "btAddSoftware";
+            this.btAddSoftware.Size = new System.Drawing.Size(76, 23);
+            this.btAddSoftware.TabIndex = 2;
+            this.btAddSoftware.Text = "Add";
+            this.btAddSoftware.UseVisualStyleBackColor = true;
+            this.btAddSoftware.Click += new System.EventHandler(this.btAddSoftware_Click);
+            // 
+            // tbSoftwareToAdd
+            // 
+            this.tbSoftwareToAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSoftwareToAdd.Location = new System.Drawing.Point(7, 309);
+            this.tbSoftwareToAdd.Name = "tbSoftwareToAdd";
+            this.tbSoftwareToAdd.Size = new System.Drawing.Size(673, 20);
+            this.tbSoftwareToAdd.TabIndex = 1;
             // 
             // lbInstalledSoftware
             // 
@@ -105,8 +133,9 @@ namespace PBCheck
             this.lbInstalledSoftware.FormattingEnabled = true;
             this.lbInstalledSoftware.Location = new System.Drawing.Point(7, 7);
             this.lbInstalledSoftware.Name = "lbInstalledSoftware";
-            this.lbInstalledSoftware.Size = new System.Drawing.Size(752, 299);
+            this.lbInstalledSoftware.Size = new System.Drawing.Size(752, 286);
             this.lbInstalledSoftware.TabIndex = 0;
+            this.lbInstalledSoftware.SelectedIndexChanged += new System.EventHandler(this.lbInstalledSoftware_SelectedIndexChanged);
             this.lbInstalledSoftware.DoubleClick += new System.EventHandler(this.lbInstalledSoftware_DoubleClick);
             // 
             // menuStrip1
@@ -143,6 +172,21 @@ namespace PBCheck
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutPBCheckToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutPBCheckToolStripMenuItem
+            // 
+            this.aboutPBCheckToolStripMenuItem.Name = "aboutPBCheckToolStripMenuItem";
+            this.aboutPBCheckToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.aboutPBCheckToolStripMenuItem.Text = "About PBCheck";
+            this.aboutPBCheckToolStripMenuItem.Click += new System.EventHandler(this.aboutPBCheckToolStripMenuItem_Click);
+            // 
             // ssStatus
             // 
             this.ssStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -159,20 +203,20 @@ namespace PBCheck
             this.tssStatus.Size = new System.Drawing.Size(53, 17);
             this.tssStatus.Text = "tssStatus";
             // 
-            // helpToolStripMenuItem
+            // lbNote
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutPBCheckToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutPBCheckToolStripMenuItem
-            // 
-            this.aboutPBCheckToolStripMenuItem.Name = "aboutPBCheckToolStripMenuItem";
-            this.aboutPBCheckToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aboutPBCheckToolStripMenuItem.Text = "About PBCheck";
-            this.aboutPBCheckToolStripMenuItem.Click += new System.EventHandler(this.aboutPBCheckToolStripMenuItem_Click);
+            this.lbNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbNote.AutoEllipsis = true;
+            this.lbNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNote.Location = new System.Drawing.Point(7, 332);
+            this.lbNote.Name = "lbNote";
+            this.lbNote.Size = new System.Drawing.Size(756, 13);
+            this.lbNote.TabIndex = 3;
+            this.lbNote.Text = "NOTE: you may want to add only the prefix of the software, leaving out any versio" +
+    "n number (e.g. \"Python\" rather than \"Python 3.9\")";
+            this.ttNote.SetToolTip(this.lbNote, "NOTE: you may want to add only the prefix of the software, leaving out any versio" +
+        "n number (e.g. \"Python\" rather than \"Python 3.9\")");
             // 
             // FrmPBCheck
             // 
@@ -190,6 +234,7 @@ namespace PBCheck
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ssStatus.ResumeLayout(false);
@@ -214,6 +259,10 @@ namespace PBCheck
         private System.Windows.Forms.ToolStripStatusLabel tssStatus;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutPBCheckToolStripMenuItem;
+        private System.Windows.Forms.Button btAddSoftware;
+        private System.Windows.Forms.TextBox tbSoftwareToAdd;
+        private System.Windows.Forms.Label lbNote;
+        private System.Windows.Forms.ToolTip ttNote;
     }
 }
 

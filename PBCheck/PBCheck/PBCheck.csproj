@@ -55,10 +55,10 @@
     <ApplicationIcon>icon-32x32.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>8B0F7D09ACF3A1B5D55DF5929FD7B8CD44332A5E</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>CCC0FD2005987F6319A3D99CD3350E32C20C7CC3</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>PBCheck_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>PBSE-SPC.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -122,6 +122,7 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="PBCheck_TemporaryKey.pfx" />
+    <None Include="PBSE-SPC.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

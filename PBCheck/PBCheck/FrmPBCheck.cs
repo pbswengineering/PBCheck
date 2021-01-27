@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PBCheck
 {
     public partial class FrmPBCheck : Form
     {
+        private Config conf;
+
         public FrmPBCheck()
         {
             InitializeComponent();
@@ -48,7 +44,7 @@ namespace PBCheck
             {
                 Application.Exit();
             }
-            var conf = Config.LoadFromFile(configFile);
+            conf = Config.LoadFromFile(configFile);
             // Clear on-screen results
             tvHints.Nodes.Clear();
             lbInstalledSoftware.Items.Clear();
@@ -134,6 +130,24 @@ namespace PBCheck
         {
             var about = new FrmAbout();
             about.ShowDialog();
+        }
+
+        private void lbInstalledSoftware_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbInstalledSoftware.SelectedItem is string selected && selected.Trim().Length > 0)
+            {
+                tbSoftwareToAdd.Text = selected;
+            }
+        }
+
+        private void btAddSoftware_Click(object sender, EventArgs e)
+        {
+            if (tbSoftwareToAdd.Text is string selected && selected.Trim().Length > 0)
+            {
+                conf.AddDesiredSoftware(tbSoftwareToAdd.Text);
+                conf.SaveToFile(GetConfigFile(false));
+                MessageBox.Show($"{selected} was added to the desired software check list.");
+            }
         }
     }
 }
