@@ -65,6 +65,8 @@ namespace PBCheck
                 missingExe.Nodes.Add(exe);
             }
             tvConfig.ExpandAll();
+            // Scroll the treeview to the top
+            tvConfig.Nodes[0].EnsureVisible();
         }
 
         private void RefreshChecks(bool forceConfigFileSelection)
@@ -178,7 +180,8 @@ namespace PBCheck
             {
                 conf.AddDesiredSoftware(tbSoftwareToAdd.Text);
                 conf.SaveToFile(GetConfigFile(false));
-                MessageBox.Show($"{selected} was added to the desired software check list.");
+                RefreshConfiguration();
+                MessageBox.Show($"{selected} was added to the desired software check list.", "PBCheck");
             }
         }
 
@@ -224,13 +227,7 @@ namespace PBCheck
 
         private void btAddSoftwareCheck_Click(object sender, EventArgs e)
         {
-            string sw = "";
-            if (ShowInputDialog("Missing Software To Check", ref sw) == DialogResult.OK)
-            {
-                conf.AddDesiredSoftware(sw);
-                conf.SaveToFile(GetConfigFile(false));
-                RefreshConfiguration();
-            }
+            tcTabs.SelectTab("tpSoftware");
         }
 
         private void btAddDirectoryCheck_Click(object sender, EventArgs e)
@@ -260,11 +257,11 @@ namespace PBCheck
         private void btRemoveCheck_Click(object sender, EventArgs e)
         {
             var selection = tvConfig.SelectedNode;
-            if (selection.Parent == null)
+            if (selection == null || selection.Parent == null)
             {
                 return;
             }
-            if (MessageBox.Show("Do you really want to delete the selected check?", "Check Deletion", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Do you really want to delete the selected check?", "PBCheck", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 var parent = selection.Parent.Text;
                 if (parent == MISSING_SW_CHECKS)
