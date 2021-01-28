@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -21,6 +22,28 @@ namespace PBCheck
         {
             DesiredSoftware.Add(software);
             DesiredSoftware.Sort();
+        }
+
+        public void AddDesiredDirectory(string directory)
+        {
+            var homeDir = Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+            if (directory.StartsWith(homeDir))
+            {
+                directory = directory.Substring(homeDir.Length);
+                if (!directory.StartsWith("\\"))
+                {
+                    directory += "\\";
+                }
+                directory = "$HOME" + directory;
+            }
+            DesiredDirectories.Add(directory);
+            DesiredDirectories.Sort();
+        }
+
+        public void AddDesiredExeInPath(string exe)
+        {
+            DesiredExeInPath.Add(exe);
+            DesiredExeInPath.Sort();
         }
 
         public void SaveToFile(string fileName)
